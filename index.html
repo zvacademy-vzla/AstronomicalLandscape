@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASTRONOMICAL LANDSCAPE</title>
+    <title>PROJECT AI AS A LANGUAGE LEARNING STUDY BUDDY</title>
     <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Configuración para fuente de Alto Contraste/Impacto -->
@@ -13,776 +13,721 @@
         // Iconos SVG reutilizables
         const icons = {
             menu: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`,
-            close: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`
+            close: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d=\"M6 18L18 6M6 6l12 12\"></path></svg>`,
+            config: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924-1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z\"></path><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 12a3 3 0 11-6 0 3 3 0 016 0z\"></path></svg>`
         };
     </script>
     <style>
-        /* Variables CSS para personalización de tema y color (VOGUE STYLE) */
+        /* Estilos base */
+        .title-font {
+            font-family: 'Rubik Mono One', monospace;
+        }
+        .subtitle-font {
+            font-family: 'Bungee Inline', sans-serif;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* TEMAS DE COLOR DINÁMICOS */
+        /* ------------------------------------------------------------------ */
+
+        /* Definición del tema por defecto (Indigo/Teal) */
         :root {
-            --primary-vogue: #D4AF37; /* Gold/Metallic (Default Dark) */
-            --secondary-vogue: #B8860B; /* Darker Gold/Bronze */
-            --accent-red: #A5002D; /* Deep Crimson Accent */
-            --text-color: #fff;
-            --background-color: #101010; /* Near Black */
-            --container-bg: rgba(25, 25, 25, 0.95); /* Dark Charcoal */
-            /* Variables específicas para Light Mode (se sobreescriben al activar) */
-            --light-text-color: #1f1f1f; /* Negro para todo el texto en Light Mode */
-            --light-background-color: #f0f0f0;
-            --light-container-bg: #ffffff;
-            --light-accent-fixed: #ef4444; /* Rojo fijo por requisito de usuario */
+            --color-primary: 96, 165, 250; /* blue-400 */
+            --color-secondary: 45, 212, 191; /* teal-400 */
+            --gradient-start: #6366f1; /* indigo-500 */
+            --gradient-end: #14b8a6; /* teal-500 */
         }
         
-        /* 1. Fondo Gradiente Sutil (Efecto Mármol Oscuro/Vogue) */
-        @keyframes dynamic-gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Tema SOLAR (Naranja/Amarillo) */
+        .theme-solar {
+            --color-primary: 251, 191, 36; /* yellow-400 */
+            --color-secondary: 249, 115, 22; /* orange-600 */
+            --gradient-start: #f59e0b; /* amber-500 */
+            --gradient-end: #f97316; /* orange-500 */
         }
 
-        .dynamic-bg {
-            background: linear-gradient(-45deg, var(--background-color), #2c2c2c, var(--secondary-vogue), var(--background-color));
-            background-size: 400% 400%;
-            animation: dynamic-gradient 30s ease infinite; 
-        }
-        
-        /* 2. Estilo VOGUE para Títulos - Afilado y Metálico */
-        .vogue-text {
-            font-family: 'Rubik Mono One', sans-serif;
-            color: var(--primary-vogue);
-            text-shadow: 
-                1px 1px 0 #000,
-                -1px -1px 0 #000,
-                0 0 5px var(--primary-vogue), 
-                0 0 10px rgba(212, 175, 55, 0.5); 
+        /* Tema CÍCLOPE (Rojo/Verde) */
+        .theme-cyclops {
+            --color-primary: 248, 113, 113; /* red-400 */
+            --color-secondary: 52, 211, 153; /* emerald-400 */
+            --gradient-start: #ef4444; /* red-500 */
+            --gradient-end: #10b981; /* emerald-500 */
         }
 
-        /* 3. Estilo VOGUE para Botones */
-        .vogue-button {
-            transition: all 0.3s ease-in-out;
-            border: 2px solid var(--accent-red);
-            background-color: transparent !important; 
-            color: var(--text-color) !important;
-            box-shadow: 3px 3px 0px 0px var(--accent-red); 
-            text-shadow: none;
-            text-transform: uppercase; 
-            letter-spacing: 0.1em;
+        /* Aplicación dinámica de colores */
+        .dynamic-text-gradient {
+            color: transparent;
+            background-clip: text;
+            background-image: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
         }
 
-        .vogue-button:hover {
-            transform: translate(3px, 3px); 
-            box-shadow: none; 
-            border-color: var(--primary-vogue);
-            color: var(--primary-vogue) !important;
+        /* Utilidades de Tailwind redefinidas con variables CSS */
+        .dynamic-primary-text { color: rgba(var(--color-primary), 1); }
+        .dynamic-secondary-text { color: rgba(var(--color-secondary), 1); }
+        .dynamic-border-primary { border-color: rgba(var(--color-primary), 1); }
+        .dynamic-border-secondary { border-color: rgba(var(--color-secondary), 1); }
+        
+        /* El botón de Canva es siempre rojo, el de LLL es siempre Indigo */
+
+        /* ------------------------------------------------------------------ */
+        /* Contraste */
+        /* ------------------------------------------------------------------ */
+        .high-contrast {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+        .high-contrast h1, .high-contrast h2, .high-contrast h3, .high-contrast .dynamic-text-gradient, .high-contrast .dynamic-primary-text {
+             /* El gradiente debe ser re-aplicado, pero en modo alto contraste usamos solo el color secundario brillante */
+             color: #FFFF00 !important;
+             background-image: none !important;
+             -webkit-text-fill-color: #FFFF00 !important;
+        }
+        .high-contrast .bg-card, .high-contrast .timeline-content, .high-contrast .flip-card-front, .high-contrast .flip-card-back {
+            background-color: #111111 !important;
+            border: 2px solid #FFFF00 !important;
+        }
+        .high-contrast .timeline-link:hover {
+             box-shadow: 0 0 25px #FFFF00;
         }
 
-        /* 4. Estilo VOGUE para el Contenedor Principal */
-        .vogue-container {
-            border: 4px solid #1f1f1f; 
-            box-shadow: 10px 10px 0px 0px var(--primary-vogue); 
-            background-color: var(--container-bg);
-            color: var(--text-color);
+
+        /* ------------------------------------------------------------------ */
+        /* Sidebar de Configuración */
+        /* ------------------------------------------------------------------ */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
         }
-        
-        /* --- ESTILOS DE TRANSICIÓN Y MODAL (PAGINA DE COMIC) --- */
-        
-        /* Contenedor del Modal (Opaco para el fondo) */
-        #menu-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Oscurece el fondo */
-            z-index: 1000;
-            display: none; /* Oculto por defecto */
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px); /* Suave desenfoque */
+        .sidebar.open {
+            transform: translateX(0);
         }
-        
-        /* Contenido del Menú (La "Página de Cómic") */
-        #menu-content {
-            background-color: var(--container-bg);
-            border: 8px solid var(--primary-vogue); /* Borde grueso estilo cómic */
-            box-shadow: 20px 20px 0px 0px var(--accent-red); /* Sombra estilo pop-art */
-            border-radius: 1rem;
-            max-width: 500px;
-            width: 90%;
-            padding: 2rem;
-            position: relative;
-            
-            /* Animación inicial oculta (doblez de página) */
-            transform: scale(0.8) rotateY(-90deg);
+        .sidebar-overlay {
+            visibility: hidden;
             opacity: 0;
-            transform-origin: left; /* Gira desde el lado izquierdo */
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+            transition: opacity 0.3s, visibility 0.3s;
         }
-        
-        /* Estado ACTIVO de la animación (Abrir) */
-        .modal-show #menu-modal-overlay {
-            display: flex;
-        }
-
-        .modal-show #menu-content {
-            transform: scale(1) rotateY(0deg);
+        .sidebar-overlay.visible {
+            visibility: visible;
             opacity: 1;
         }
-        
-        /* Contenido principal desenfocado cuando el modal está abierto */
-        .blur-content {
-            transition: filter 0.3s ease;
-        }
-        .modal-show .blur-content {
-            filter: blur(3px);
-        }
 
-        /* Light Mode */
-        .light-mode {
-            --text-color: var(--light-text-color); 
-            --background-color: var(--light-background-color); 
-            --container-bg: var(--light-container-bg); 
-            background: var(--light-background-color); 
-            animation: none;
-            color: var(--text-color);
-        }
-        .light-mode .dynamic-bg {
-            background: var(--light-background-color);
-            animation: none;
-        }
-        
-        /* ------------------------------------- */
-        /* --- NUEVO ESTILO: NEÓN + PARTÍCULAS --- */
-        /* ------------------------------------- */
-        
-        /* Definición de la animación de parpadeo neón (simula partículas) */
-        @keyframes neon-flicker {
-            0% {
-                text-shadow: 0 0 4px var(--primary-vogue), 0 0 10px var(--accent-red), 0 0 20px rgba(255, 0, 0, 0.5);
-                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-                transform: scale(1);
-            }
-            5% {
-                text-shadow: 0 0 2px var(--primary-vogue), 0 0 8px var(--accent-red);
-                box-shadow: none;
-                transform: scale(0.99);
-            }
-            10% {
-                text-shadow: 0 0 4px var(--primary-vogue), 0 0 12px var(--accent-red), 0 0 25px rgba(255, 0, 0, 0.6);
-                box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-                transform: scale(1.01);
-            }
-            15% {
-                text-shadow: none;
-                box-shadow: none;
-            }
-            20%, 100% {
-                text-shadow: 0 0 4px var(--primary-vogue), 0 0 10px var(--accent-red), 0 0 20px rgba(255, 0, 0, 0.5);
-                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-                transform: scale(1);
-            }
-        }
-        
-        .dynamic-footer-link {
-            /* Estilo base neón */
-            color: var(--primary-vogue);
-            background-color: transparent !important;
-            transition: all 0.2s ease-out;
-            
-            /* Sombra neón inicial */
-            text-shadow: 0 0 4px var(--primary-vogue), 0 0 10px var(--accent-red);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-            border: 1px solid var(--primary-vogue);
-        }
-
-        .dynamic-footer-link:hover {
-            animation: neon-flicker 1.5s ease-in-out infinite alternate; 
-            border-color: var(--accent-red);
-        }
-        
-        /* Otras animaciones (mantidas) */
-        @keyframes pulse-down {
-            0% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; box-shadow: 0 0 10px rgba(212, 175, 55, 0.7); }
-            50% { transform: scale(1.1) translateY(12px) rotate(5deg); opacity: 0.8; box-shadow: 0 0 20px var(--primary-vogue), 0 0 5px var(--accent-red); }
-            100% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; box-shadow: 0 0 10px rgba(212, 175, 55, 0.7); }
-        }
-        .pulsing-downwards {
-            animation: pulse-down 2s ease-in-out infinite;
-            border: 2px solid var(--accent-red);
-        }
-        
-        /* Timeline styles (kept for reference) */
-        /* ... (styles for roadmap kept from previous version) ... */
-        .timeline-container {
+        /* ------------------------------------------------------------------ */
+        /* Animación de Línea de Tiempo (Roadmap) */
+        /* ------------------------------------------------------------------ */
+        .timeline-wrapper {
             position: relative;
-            padding-left: 2rem; 
         }
-        #timeline-svg-path {
-            stroke-dasharray: 10000; 
-            stroke-dashoffset: 10000;
-            transition: stroke-dashoffset 2s ease-out; 
-            stroke-linecap: round;
+        .timeline-path {
+            stroke-dasharray: 20000;
+            stroke-dashoffset: 20000;
+            transition: stroke-dashoffset 3s ease-out;
         }
-        .animate-roadmap #timeline-svg-path {
-            stroke-dashoffset: 0; 
+        .animate-roadmap .timeline-path {
+            stroke-dashoffset: 0;
         }
         .timeline-item {
-            position: relative;
-            padding-bottom: 3rem;
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-in, transform 0.5s ease-in;
-            transition-delay: 0s; 
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateX(0);
         }
-        .milestone-visible {
+        .timeline-item.milestone-visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0) !important;
         }
-        .timeline-node {
-            position: absolute;
-            left: 1rem; 
-            top: 0.5rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            border-radius: 50%;
-            background-color: var(--primary-vogue);
-            border: 4px solid var(--background-color); 
-            z-index: 20;
-            box-shadow: 0 0 0 3px var(--accent-red); 
-            transition: all 0.3s;
+        .timeline-item.timeline-left {
+            transform: translateX(-50px);
         }
-        .group:hover .timeline-node {
-            transform: scale(1.1); 
-            background-color: var(--accent-red);
-            box-shadow: 0 0 0 3px var(--primary-vogue); 
+        .timeline-item.timeline-right {
+            transform: translateX(50px);
         }
-        .roadmap-stage {
-            border: 1px solid var(--secondary-vogue); 
-            box-shadow: 5px 5px 0px 0px var(--accent-red); 
-            transition: all 0.4s ease-in-out; 
-            background-color: var(--container-bg); 
+        
+        /* ------------------------------------------------------------------ */
+        /* Animación Interactiva de Brillo/Glow para los Enlaces (Roadmap Cards) */
+        /* ------------------------------------------------------------------ */
+        .timeline-link {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Flip Card Animation */
-        .flip-container {
-            perspective: 1000px; 
-            cursor: pointer;
-            height: 384px; 
-            max-width: 100%;
+        .timeline-link:hover {
+            transform: scale(1.05) translateY(-5px);
+            filter: brightness(1.1);
         }
-        .flipper {
-            transition: 0.8s;
+        
+        /* Glows genéricos basados en colores fijos para las fases */
+        .glow-blue:hover { box-shadow: 0 0 25px rgba(96, 165, 250, 0.8); } 
+        .glow-teal:hover { box-shadow: 0 0 25px rgba(45, 212, 191, 0.8); } 
+        .glow-pink:hover { box-shadow: 0 0 25px rgba(232, 121, 220, 0.8); } 
+        .glow-orange:hover { box-shadow: 0 0 25px rgba(251, 146, 60, 0.8); } 
+
+
+        /* ------------------------------------------------------------------ */
+        /* Efecto de Tarjeta Volteable (FLIP CARD) */
+        /* ------------------------------------------------------------------ */
+        .flip-card-container {
+            perspective: 1000px;
+            /* Altura fija para mantener el layout */
+            height: 550px; 
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .flip-card {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
             transform-style: preserve-3d;
             position: relative;
-            width: 100%;
-            height: 100%;
+            cursor: pointer;
         }
-        .flip-container:hover .flipper {
+
+        .flip-card-container:hover .flip-card {
             transform: rotateY(180deg);
         }
-        .front, .back {
-            backface-visibility: hidden;
+        .flip-card-front, .flip-card-back {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 0.75rem; 
-            padding: 1.5rem; 
-            border: 4px solid #1f1f1f; 
-            box-shadow: 10px 10px 0px 0px var(--primary-vogue); 
-            background-color: var(--container-bg);
-            color: var(--text-color);
-        }
-        .front {
-            z-index: 2;
-            transform: rotateY(0deg);
-            border-left: 8px solid var(--accent-red); 
-            border-color: var(--accent-red);
+            backface-visibility: hidden;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            padding: 1.5rem;
+            border-radius: 0.75rem; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); 
         }
-        .back {
+        .flip-card-back {
             transform: rotateY(180deg);
-            background-color: var(--container-bg); 
-            box-shadow: 10px 10px 0px 0px var(--accent-red); 
-            border-color: var(--primary-vogue);
-            overflow-y: auto;
-            padding: 1rem 1.5rem; 
+            /* Estilo específico para el reverso */
+            background-color: #262626; 
+            border: 2px solid #ef4444; /* Rojo para el acento */
+        }
+        .flip-card-front {
+            background-color: #1c1c1c; 
+            border: 2px solid var(--gradient-start); /* Usa el color dinámico */
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Corrección móvil */
+        @media (max-width: 768px) {
+            .flip-card-container {
+                height: auto; /* Permitir altura variable en móvil */
+                min-height: 400px;
+            }
+            /* Desactivar el volteo real en móvil para mejor usabilidad, se mostrará el contenido principal */
+            .flip-card {
+                transform: none !important;
+                transform-style: flat;
+                transition: none;
+            }
+            .flip-card-back {
+                position: relative; /* Mostrar contenido back debajo del front */
+                transform: none;
+                margin-top: 1rem;
+                border-top: 1px solid #444;
+            }
+            .flip-card-front {
+                position: relative;
+                box-shadow: none;
+            }
+        }
+        /* Estilo para el cursor de la máquina de escribir */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            margin-left: 2px;
+            background-color: #ef4444; /* Rojo/Naranja brillante */
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
     </style>
 </head>
-<body>
+<body class="bg-[#0f0f0f] text-gray-100 min-h-screen">
     
-    <!-- 8. Contenedor principal del contenido. Ahora se le aplica el desenfoque -->
-    <div id="main-content-wrapper" class="blur-content dynamic-bg min-h-screen p-4 sm:p-8 flex justify-center items-start pt-10 relative lg:pt-10">
+    <!-- Overlay del Sidebar (Aplica el efecto Blur) -->
+    <div id="sidebar-overlay" class="sidebar-overlay fixed inset-0 bg-black/50 backdrop-blur-sm z-[55] cursor-pointer" onclick="closeSidebar()"></div>
 
-        <!-- BOTÓN DE MENÚ (Hamburguesa, ahora reintroducido) -->
-        <div id="menu-trigger-container" class="fixed top-6 right-6 z-50">
-            <button id="menu-open-btn" onclick="toggleMenu()" 
-                class="vogue-button w-16 h-16 rounded-full flex items-center justify-center p-3 text-white transition-transform duration-300 hover:rotate-6"
-                style="background-color: var(--accent-red);"
-                aria-label="Abrir menú de configuración">
-                <script>document.write(icons.menu);</script>
-            </button>
-        </div>
-
-        <div class="w-full max-w-6xl p-6 md:p-10 rounded-xl vogue-container">
-
-            <!-- CABECERA PRINCIPAL ESTILO VOGUE -->
-            <header class="text-center mb-10">
-                <h1 class="text-4xl sm:text-6xl font-extrabold vogue-text leading-tight mb-4">
-                    PROJECT AI AS A LANGUAGE LEARNING STUDY BUDDY
-                </h1>
-                <p class="text-lg sm:text-xl font-mono text-gray-300" style="color: var(--text-color);">
-                    Convirtiendo a la inteligencia artificial en tu aliada para potenciar tu aprendizaje de un idioma en 2025.
-                </p>
-            </header>
-
-            <!-- ACCESOS RÁPIDOS (BOTONES VOGUE) -->
-            <section class="mb-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8">
-                <a href="https://labs.google/lll/en/experiments/tiny-lesson" target="_blank"
-                    class="vogue-button bg-pink-700/80 hover:bg-green-600/80 text-white font-bold py-3 px-8 rounded-lg uppercase text-sm tracking-widest text-center">
-                    Acceso Rápido: Google LLL
-                </a>
-                <a href="#roadmap-anchor"
-                    class="vogue-button bg-green-700/80 hover:bg-pink-600/80 text-white font-bold py-3 px-8 rounded-lg uppercase text-sm tracking-widest text-center">
-                    Ver Roadmap 2025
-                </a>
-            </section>
-
-            <!-- SECCIÓN INTRODUCCIÓN CON ANIMACIÓN FLIP CARD -->
-            <section class="flip-container h-96 mb-16">
-                <div class="flipper">
-                    
-                    <!-- CARA FRONTAL: Introducción Original -->
-                    <div class="front">
-                        <div class="flex items-center">
-                            <div class="text-6xl mr-6 leading-none select-none" style="color:var(--primary-vogue); text-shadow: 0 0 10px var(--primary-vogue);">
-                                ⚜️
-                            </div>
-                            <div>
-                                <h2 class="text-3xl font-bold mb-2" style="color:var(--accent-red);">¿Qué es el AI Language Roadmap?</h2>
-                                <p style="color: var(--text-color);">
-                                    Es la guía definitiva para aprovechar las Inteligencias Artificiales más avanzadas que marcarán el aprendizaje de idiomas en **2025**. Desde tutores conversacionales hasta arquitectos de currículo personalizados.
-                                </p>
-                                <p class="mt-4 text-xs italic opacity-70" style="color: var(--text-color);">
-                                    (Pasa el ratón por encima para voltear la tarjeta y ver la lista de IA's)
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- CARA TRASERA: Lista de IA's y Estrategias -->
-                    <div class="back">
-                        <h3 class="text-2xl font-bold mb-4 uppercase" style="color:var(--primary-vogue); border-bottom: 2px solid var(--secondary-vogue);">
-                            Top IA's para tu Maestría Lingüística
-                        </h3>
-                        <p class="text-sm font-light mb-4" style="color:var(--text-color);">
-                            Estrategias clave para aprovechar las IA's por nivel en **Inglés, Japonés y Alemán**.
-                        </p>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-4">
-                            <!-- Contenido de la lista de IAs (omito por brevedad, está en el style block) -->
-                            <div>
-                                <h4 class="font-bold text-lg mb-2" style="color: #6ee7b7;">🇬🇧 Inglés: Tutor Conversacional</h4>
-                                <ul class="list-disc pl-5 space-y-2 text-gray-300" style="color: var(--text-color);">
-                                    <li>**Básico:** *PolyglotAI*. Enfocarse en la construcción de frases cortas.</li>
-                                    <li>**Intermedio:** *RolePlay Zenith*. Usar escenarios de negocios.</li>
-                                    <li>**Avanzado:** *Idiom Matrix*. Investigar y aplicar 5 modismos nuevos por semana.</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2" style="color: #fca5a5;">🇯🇵 Japonés: Kanji y Gramática</h4>
-                                <ul class="list-disc pl-5 space-y-2 text-gray-300" style="color: var(--text-color);">
-                                    <li>**Básico:** *FlashCard Synapse*. Dominar los 100 Kanjis más comunes.</li>
-                                    <li>**Intermedio:** *Curriculum Forge*. Usar estructuras de cortesía (Keigo).</li>
-                                    <li>**Avanzado:** *Synaptic Sound*. Practicar la entonación leyendo noticias en voz alta.</li>
-                                </ul>
-                            </div>
-                            <div class="sm:col-span-2">
-                                <h4 class="font-bold text-lg mb-2" style="color: #facc15;">🇩🇪 Alemán: Estructura de Oraciones</h4>
-                                <ul class="list-disc pl-5 space-y-2 text-gray-300" style="color: var(--text-color);">
-                                    <li>**Básico:** *PolyglotAI*. Memorizar los casos (Nominativ, Akkusativ).</li>
-                                    <li>**Intermedio:** *RolePlay Zenith*. Simular debates.</li>
-                                    <li>**Avanzado:** *Curriculum Forge*. Centrarse en la construcción de oraciones complejas.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-            
-            <!-- TRANSICIÓN VISUAL: Separador Dinámico VOGUE y Link In-Page -->
-            <div class="flex justify-center items-center py-8 mb-16">
-                <!-- Enlace que lleva al ancla del Roadmap -->
-                <a href="#roadmap-anchor" id="transition-separator" class="w-16 h-16 rounded-full pulsing-downwards flex items-center justify-center"
-                    style="background: linear-gradient(45deg, var(--primary-vogue), var(--accent-red));">
-                    <!-- Icono de flecha SVG -->
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7"></path>
-                    </svg>
-                </a>
-            </div>
-
-
-            <!-- ROADMAP PRINCIPAL (Timeline Dinámica con SVG) -->
-            <section id="roadmap" class="pt-8">
-                <!-- ANCLAJE para el link in-page -->
-                <div id="roadmap-anchor" class="pt-1"></div>
-                
-                <h2 class="text-4xl font-bold text-center mb-12 vogue-text">
-                    ROADMAP: Línea de Tiempo IA 2025
-                </h2>
-
-                <!-- Contenedor de la Línea de Tiempo -->
-                <div id="timeline-wrapper" class="timeline-container max-w-3xl mx-auto relative">
-                    
-                    <!-- SVG para la línea vertical animada (Oculto en móvil por la superposición de elementos, visible en MD+) -->
-                    <div class="absolute inset-0 hidden md:block" style="left: 1.5rem; width: 3px;">
-                        <svg class="h-full w-full" viewBox="0 0 3 20000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path id="timeline-svg-path" 
-                                d="M 1.5 0 L 1.5 20000" 
-                                stroke="var(--primary-vogue)" 
-                                stroke-width="3" 
-                                vector-effect="non-scaling-stroke"
-                                stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    
-                    <!-- REPETICIÓN DEL ROADMAP PARA HACERLO MÁS GRANDE (Set 1) -->
-                    
-                    <!-- ITEM 1: Q1 2025 - CIMENTACIÓN -->
-                    <div data-delay="0.5" class="timeline-item milestone-content group relative">
-                        <div class="timeline-node"></div>
-                        <div class="p-6 rounded-xl roadmap-stage ml-8 md:ml-16 cursor-pointer">
-                            <div class="flex items-center space-x-4">
-                                <div class="text-4xl" style="color:var(--accent-red);">🚀</div>
-                                <h3 class="text-2xl font-bold" style="color:var(--secondary-vogue);">FASE 1: AI Pronunciación Ágil (Q1)</h3>
-                            </div>
-                            <p class="text-sm text-gray-400 mt-2" style="color: var(--text-color);">
-                                **Herramienta Clave:** *Synaptic Sound Coach*. (Pasa el ratón para ver detalles)
-                            </p>
-                            <div class="detail-hidden border-t border-gray-700" style="border-color: var(--accent-red);">
-                                <p class="text-sm pt-2" style="color: var(--text-color);">
-                                    Énfasis en la fonética. IA que corrige los micro-sonidos de tu voz en tiempo real con una precisión milimétrica.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ITEM 2: Q2 2025 - INMERSIÓN -->
-                    <div data-delay="1.0" class="timeline-item milestone-content group relative">
-                        <div class="timeline-node"></div>
-                        <div class="p-6 rounded-xl roadmap-stage ml-8 md:ml-16 cursor-pointer">
-                            <div class="flex items-center space-x-4">
-                                <div class="text-4xl" style="color:var(--accent-red);">🗣️</div>
-                                <h3 class="text-2xl font-bold" style="color:var(--secondary-vogue);">FASE 2: Conversación Contextual (Q2)</h3>
-                            </div>
-                            <p class="text-sm text-gray-400 mt-2" style="color: var(--text-color);">
-                                **Herramienta Clave:** *RolePlay Zenith*. (Pasa el ratón para ver detalles)
-                            </p>
-                            <div class="detail-hidden border-t border-gray-700" style="border-color: var(--accent-red);">
-                                <p class="text-sm pt-2" style="color: var(--text-color);">
-                                    Simulación de interacciones sociales y profesionales complejas, evaluando la fluidez en escenarios de la vida real.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ITEM 3: Q3 2025 - PROFUNDIZACIÓN -->
-                    <div data-delay="1.5" class="timeline-item milestone-content group relative">
-                        <div class="timeline-node"></div>
-                        <div class="p-6 rounded-xl roadmap-stage ml-8 md:ml-16 cursor-pointer">
-                            <div class="flex items-center space-x-4">
-                                <div class="text-4xl" style="color:var(--accent-red);">📝</div>
-                                <h3 class="text-2xl font-bold" style="color:var(--secondary-vogue);">FASE 3: Arquitecto Gramatical (Q3)</h3>
-                            </div>
-                            <p class="text-sm text-gray-400 mt-2" style="color: var(--text-color);">
-                                **Herramienta Clave:** *Curriculum Forge*. (Pasa el ratón para ver detalles)
-                            </p>
-                            <div class="detail-hidden border-t border-gray-700" style="border-color: var(--accent-red);">
-                                <p class="text-sm pt-2" style="color: var(--text-color);">
-                                    Generación de un currículo 100% adaptado a tus debilidades. La IA predice los temas que te costarán más.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ITEM 4: Q4 2025 - MAESTRÍA -->
-                    <div data-delay="2.0" class="timeline-item milestone-content group relative">
-                        <div class="timeline-node"></div>
-                        <div class="p-6 rounded-xl roadmap-stage ml-8 md:ml-16 cursor-pointer">
-                            <div class="flex items-center space-x-4">
-                                <div class="text-4xl" style="color:var(--accent-red);">⛩️</div>
-                                <h3 class="text-2xl font-bold" style="color:var(--secondary-vogue);">FASE 4: Navegador Cultural (Q4)</h3>
-                            </div>
-                            <p class="text-sm text-gray-400 mt-2" style="color: var(--text-color);">
-                                **Herramienta Clave:** *Idiom Matrix*. (Pasa el ratón para ver detalles)
-                            </p>
-                            <div class="detail-hidden border-t border-gray-700" style="border-color: var(--accent-red);">
-                                <p class="text-sm pt-2" style="color: var(--text-color);">
-                                    Dominio de los matices culturales, explicando el origen y contexto de modismos y argot.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- REPETICIÓN DEL ROADMAP PARA HACERLO MÁS GRANDE (Set 2 - Extensión) -->
-                    
-                    <div class="text-center pt-8 pb-12">
-                        <h4 class="text-xl font-bold vogue-text" style="color: var(--accent-red);">EXTENSIÓN 2026: INNOVACIÓN CONTINUA</h4>
-                    </div>
-                    
-                    <!-- ITEM 5: Q1 2026 - PERSONALIZACIÓN -->
-                    <div data-delay="2.5" class="timeline-item milestone-content group relative">
-                        <div class="timeline-node"></div>
-                        <div class="p-6 rounded-xl roadmap-stage ml-8 md:ml-16 cursor-pointer">
-                            <div class="flex items-center space-x-4">
-                                <div class="text-4xl" style="color:var(--accent-red);">🧠</div>
-                                <h3 class="text-2xl font-bold" style="color:var(--secondary-vogue);">FASE 5: Mentoría Cognitiva (Q1 2026)</h3>
-                            </div>
-                            <p class="text-sm text-gray-400 mt-2" style="color: var(--text-color);">
-                                **Herramienta Clave:** *Memory Weaver*. (Pasa el ratón para ver detalles)
-                            </p>
-                            <div class="detail-hidden border-t border-gray-700" style="border-color: var(--accent-red);">
-                                <p class="text-sm pt-2" style="color: var(--text-color);">
-                                    IA que mapea tus patrones de olvido y programa repasos inteligentes justo antes de que olvides un concepto.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ITEM 6: Q2 2026 - PRODUCCIÓN -->
-                    <div data-delay="3.0" class="timeline-item milestone-content group relative">
-                        <div class="timeline-node"></div>
-                        <div class="p-6 rounded-xl roadmap-stage ml-8 md:ml-16 cursor-pointer">
-                            <div class="flex items-center space-x-4">
-                                <div class="text-4xl" style="color:var(--accent-red);">🎥</div>
-                                <h3 class="text-2xl font-bold" style="color:var(--secondary-vogue);">FASE 6: Producción Multimedia (Q2 2026)</h3>
-                            </div>
-                            <p class="text-sm text-gray-400 mt-2" style="color: var(--text-color);">
-                                **Herramienta Clave:** *Creative Script AI*. (Pasa el ratón para ver detalles)
-                            </p>
-                            <div class="detail-hidden border-t border-gray-700" style="border-color: var(--accent-red);">
-                                <p class="text-sm pt-2" style="color: var(--text-color);">
-                                    Escribir y producir guiones de video o podcast en el idioma objetivo, con corrección de estilo y tono por la IA.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ITEM 7: Q3 2026 - ADAPTACIÓN -->
-                    <div data-delay="3.5" class="timeline-item milestone-content group relative">
-                        <div class="timeline-node"></div>
-                        <div class="p-6 rounded-xl roadmap-stage ml-8 md:ml-16 cursor-pointer">
-                            <div class="flex items-center space-x-4">
-                                <div class="text-4xl" style="color:var(--accent-red);">🌍</div>
-                                <h3 class="text-2xl font-bold" style="color:var(--secondary-vogue);">FASE 7: Adaptación Dialectal (Q3 2026)</h3>
-                            </div>
-                            <p class="text-sm text-gray-400 mt-2" style="color: var(--text-color);">
-                                **Herramienta Clave:** *Dialect Sync*. (Pasa el ratón para ver detalles)
-                            </p>
-                            <div class="detail-hidden border-t border-gray-700" style="border-color: var(--accent-red);">
-                                <p class="text-sm pt-2" style="color: var(--text-color);">
-                                    Módulo avanzado para dominar acentos regionales y dialectos específicos (Ej: Inglés Británico vs. Australiano; Alemán Suizo).
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </section>
-
-            <!-- FOOTER DINÁMICO (TYPEWRITER y NEON FLICKER) -->
-            <footer class="text-center mt-16 pt-8 border-t border-gray-700" style="border-color: var(--text-color);">
-                <!-- El <a> ahora tiene el efecto NEON FLICKER al hacer hover -->
-                <a href="https://www.instagram.com/zvacademy_vzla" target="_blank" 
-                   class="dynamic-footer-link transition duration-500 p-2 rounded-lg" 
-                   style="background-color: var(--container-bg); border-color: var(--primary-vogue);">
-                    <div class="flex justify-center items-center h-8">
-                        <span id="typewriter-output" class="typewriter-text text-xl font-bold"></span>
-                    </div>
-                    <p class="text-xs mt-4" style="color: var(--text-color);">
-                        (Haz clic en el icono de arriba a la derecha para la configuración)
-                    </p>
-                </a>
-            </footer>
-        </div>
-    </div>
-    
-    <!-- MODAL DE CONFIGURACIÓN (CENTRAL Y ANIMADO) -->
-    <div id="menu-modal-overlay" onclick="handleOutsideClick(event)">
-        <div id="menu-content">
-            <h2 class="text-3xl font-extrabold vogue-text text-center mb-10 mt-4">CONFIGURACIÓN POP-ART</h2>
-            
-            <!-- Botón de Cerrar (dentro del modal) -->
-            <button id="menu-close-btn" onclick="toggleMenu()" 
-                class="absolute top-4 right-4 text-white p-2 rounded-full hover:bg-white/10 transition-colors"
-                aria-label="Cerrar menú">
+    <!-- Sidebar de Configuración -->
+    <aside id="settings-sidebar" class="sidebar fixed top-0 right-0 h-full w-64 bg-[#1c1c1c] shadow-2xl z-[60] p-6 flex flex-col space-y-6 border-l border-gray-700">
+        <div class="flex justify-between items-center pb-4 border-b border-gray-700">
+            <h3 class="text-2xl font-bold dynamic-primary-text title-font">Configuración</h3>
+            <button onclick="closeSidebar()" class="text-gray-400 hover:text-white transition duration-300">
                 <script>document.write(icons.close);</script>
             </button>
+        </div>
 
-            <div class="space-y-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4" style="color: var(--secondary-vogue);">Modo de Visualización:</h3>
-                    <button id="theme-toggle-btn" onclick="toggleTheme()" class="vogue-button w-full py-3 px-6 rounded-lg uppercase text-sm tracking-widest" style="background-color: var(--accent-red);">
-                        Modo: Claro
-                    </button>
+        <!-- Opciones de Contraste -->
+        <div>
+            <h4 class="text-lg font-semibold mb-2 dynamic-secondary-text">Modo de Contraste</h4>
+            <button id="contrast-toggle-sidebar" class="w-full py-2 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-300 text-white font-medium">
+                Alternar Alto Contraste
+            </button>
+        </div>
+
+        <!-- Opciones de Tema de Color -->
+        <div>
+            <h4 class="text-lg font-semibold mb-2 dynamic-secondary-text">Paleta de Color</h4>
+            <div class="space-y-3">
+                <button data-theme="default" class="theme-button w-full py-2 px-4 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition duration-300 text-white font-medium shadow-md flex items-center justify-center">
+                    Original (Indigo/Teal)
+                </button>
+                <button data-theme="solar" class="theme-button w-full py-2 px-4 rounded-lg bg-yellow-500 hover:bg-yellow-600 transition duration-300 text-gray-900 font-medium shadow-md flex items-center justify-center">
+                    Solar (Naranja/Amarillo)
+                </button>
+                <button data-theme="cyclops" class="theme-button w-full py-2 px-4 rounded-lg bg-red-500 hover:bg-red-600 transition duration-300 text-white font-medium shadow-md flex items-center justify-center">
+                    Cíclope (Rojo/Verde)
+                </button>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- Navbar/Header Fijo -->
+    <header class="sticky top-0 z-50 bg-[#0f0f0f]/90 backdrop-blur-sm shadow-xl p-4">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold title-font text-white hover:dynamic-primary-text transition duration-300 cursor-pointer" onclick="window.scrollTo(0, 0)">PROJECT AI</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#inicio" class="text-gray-300 hover:dynamic-primary-text transition duration-300 text-lg font-semibold">Inicio</a>
+                <a href="#ia-buddies" class="text-gray-300 hover:dynamic-primary-text transition duration-300 text-lg font-semibold">Top IAs</a>
+                <a href="#roadmap" class="text-gray-300 hover:dynamic-primary-text transition duration-300 text-lg font-semibold">Roadmap 2025</a>
+            </div>
+            <!-- Botón para abrir el Sidebar de Configuración -->
+            <button id="config-icon-button" class="text-white hover:dynamic-primary-text transition duration-300" title="Configuración">
+                 <script>document.write(icons.config);</script>
+            </button>
+            <button id="menu-button" class="md:hidden text-white" aria-label="Abrir menú">
+                <!-- Icono de Menú SVG (se inyecta con JS) -->
+            </button>
+        </nav>
+    </header>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#0f0f0f] z-50 hidden flex-col items-center justify-center space-y-8 md:hidden">
+        <button id="close-button" class="absolute top-4 right-4 text-white" aria-label="Cerrar menú">
+            <!-- Icono de Cerrar SVG (se inyecta con JS) -->
+        </button>
+        <a href="#inicio" class="text-4xl text-white hover:dynamic-primary-text transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Inicio</a>
+        <a href="#ia-buddies" class="text-4xl text-white hover:dynamic-primary-text transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Top IAs</a>
+        <a href="#roadmap" class="text-4xl text-white hover:dynamic-primary-text transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Roadmap 2025</a>
+        <button onclick="openSidebar(); document.getElementById('mobile-menu').classList.add('hidden');" class="text-4xl text-white hover:dynamic-primary-text transition duration-300">Configuración</button>
+    </div>
+
+    <!-- Sección de Inicio (Hero) -->
+    <section id="inicio" class="pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto text-center min-h-[calc(100vh-64px)] flex flex-col justify-center">
+        <h2 class="text-6xl md:text-8xl font-extrabold title-font dynamic-text-gradient mb-4 leading-tight">
+            PROJECT AI AS A LANGUAGE LEARNING STUDY BUDDY
+        </h2>
+        <p class="text-2xl md:text-4xl subtitle-font text-white mb-8">
+            Convirtiendo a la inteligencia artificial en tu aliada para potenciar tu aprendizaje de un idioma en 2025.
+        </p>
+        <div class="flex justify-center flex-wrap gap-4">
+            
+            <!-- BOTÓN LÁMINAS CANVA (Fijo) -->
+            <a href="https://www.canva.com/design/DAGzwcUtwfk/9qScd6GFWUpXqFna3zCmjg/view?utm_content=DAGzwcUtwfk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h85a47b5924" target="_blank" class="px-8 py-3 bg-red-600 text-white text-xl font-bold rounded-full shadow-lg hover:bg-red-700 transition duration-300 transform hover:scale-105">
+                🌐 Láminas del Debate (Canva)
+            </a>
+            
+            <!-- BOTÓN GOOGLE LLL (Fijo) -->
+            <a href="https://labs.google/lll/en/experiments/tiny-lesson" target="_blank" class="px-8 py-3 bg-indigo-600 text-white text-xl font-bold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+                Acceso Rápido: Google LLL
+            </a>
+            
+            <!-- BOTÓN ROADMAP (Usa color secundario dinámico) -->
+            <a href="#roadmap" class="px-8 py-3 bg-transparent border-2 dynamic-border-secondary dynamic-secondary-text text-xl font-bold rounded-full shadow-lg hover:bg-white/10 transition duration-300 transform hover:scale-105">
+                Ver Roadmap 2025
+            </a>
+        </div>
+        <!-- Many adventures star -->
+        <p class="text-xs text-gray-500 mt-8">Many adventures star</p>
+    </section>
+
+    <!-- Sección de Top IAs y Flip Card -->
+    <section id="ia-buddies" class="py-16 px-4 md:px-8 bg-[#151515]">
+        <h2 class="text-5xl font-extrabold title-font text-center text-white mb-12">
+            Top IA's para tu <span class="dynamic-secondary-text">Maestría Lingüística</span>
+        </h2>
+        <div class="flip-card-container">
+            <div class="flip-card">
+                <!-- Frente de la Tarjeta (Usa color primario dinámico) -->
+                <div class="flip-card-front dynamic-border-primary">
+                    <div class="max-w-xl">
+                        <h3 class="text-4xl font-extrabold title-font dynamic-primary-text mb-4">
+                            ¿Qué es el AI Language Roadmap?
+                        </h3>
+                        <p class="text-xl text-gray-300 mb-6">
+                            Es la guía definitiva para aprovechar las Inteligencias Artificiales más avanzadas que marcarán el aprendizaje de idiomas en <strong class="dynamic-secondary-text">2025</strong>. Desde tutores conversacionales hasta arquitectos de currículo personalizados.
+                        </p>
+                        <p class="text-lg text-gray-400 mt-8">
+                            (Pasa el ratón por encima para voltear la tarjeta y ver la lista de IA's)
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4" style="color: var(--secondary-vogue);">Seleccionar Color VOGUE:</h3>
-                    <div class="flex justify-around space-x-2">
-                        <!-- Botones de color -->
-                        <button id="color-btn-gold" onclick="changeVogueColor('gold')" 
-                                class="color-option p-4 rounded-full w-1/4 h-16 transition duration-300" style="background-color: #D4AF37;">
-                        </button>
-                        <button id="color-btn-crimson" onclick="changeVogueColor('crimson')" 
-                                class="color-option p-4 rounded-full w-1/4 h-16 transition duration-300" style="background-color: #A5002D;">
-                        </button>
-                        <button id="color-btn-silver" onclick="changeVogueColor('silver')" 
-                                class="color-option p-4 rounded-full w-1/4 h-16 transition duration-300" style="background-color: #C0C0C0;">
-                        </button>
-                        <button id="color-btn-sapphire" onclick="changeVogueColor('sapphire')" 
-                                class="color-option p-4 rounded-full w-1/4 h-16 transition duration-300" style="background-color: #0F52BA;">
-                        </button>
+
+                <!-- Reverso de la Tarjeta (Fijo) -->
+                <div class="flip-card-back">
+                    <h3 class="text-3xl font-extrabold title-font text-red-400 mb-4">
+                        Estrategias clave por Nivel
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6 flex-grow overflow-auto">
+                        <!-- Inglés -->
+                        <div class="p-3 bg-gray-900 rounded-lg border-l-4 border-yellow-500">
+                            <h4 class="text-xl font-bold mb-2 text-yellow-500 flex items-center">
+                                🇬🇧 Inglés: Tutor Conversacional
+                            </h4>
+                            <p class="text-sm text-gray-400"><strong>Básico:</strong> <a href="https://ai-buddy.dev/polyglot" target="_blank" class="text-indigo-300 hover:underline">PolyglotAI</a>. Enfocarse en la construcción de frases cortas.</p>
+                            <p class="text-sm text-gray-400"><strong>Intermedio:</strong> <a href="https://ai-buddy.dev/zenith" target="_blank" class="text-indigo-300 hover:underline">RolePlay Zenith</a>. Usar escenarios de negocios.</p>
+                            <p class="text-sm text-gray-400"><strong>Avanzado:</strong> <a href="https://ai-buddy.dev/matrix" target="_blank" class="text-indigo-300 hover:underline">Idiom Matrix</a>. Investigar y aplicar 5 modismos nuevos por semana.</p>
+                        </div>
+                        <!-- Japonés -->
+                        <div class="p-3 bg-gray-900 rounded-lg border-l-4 border-pink-500">
+                            <h4 class="text-xl font-bold mb-2 text-pink-500 flex items-center">
+                                🇯🇵 Japonés: Kanji y Gramática
+                            </h4>
+                            <p class="text-sm text-gray-400"><strong>Básico:</strong> <a href="https://ai-buddy.dev/synapse" target="_blank" class="text-indigo-300 hover:underline">FlashCard Synapse</a>. Dominar los 100 Kanjis más comunes.</p>
+                            <p class="text-sm text-gray-400"><strong>Intermedio:</strong> <a href="https://ai-buddy.dev/forge" target="_blank" class="text-indigo-300 hover:underline">Curriculum Forge</a>. Usar estructuras de cortesía (Keigo).</p>
+                            <p class="text-sm text-gray-400"><strong>Avanzado:</strong> <a href="https://ai-buddy.dev/sound" target="_blank" class="text-indigo-300 hover:underline">Synaptic Sound</a>. Practicar la entonación leyendo noticias en voz alta.</p>
+                        </div>
+                        <!-- Alemán -->
+                        <div class="p-3 bg-gray-900 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="text-xl font-bold mb-2 text-blue-500 flex items-center">
+                                🇩🇪 Alemán: Estructura de Oraciones
+                            </h4>
+                            <p class="text-sm text-gray-400"><strong>Básico:</strong> <a href="https://ai-buddy.dev/polyglot" target="_blank" class="text-indigo-300 hover:underline">PolyglotAI</a>. Memorizar los casos (Nominativ, Akkusativ).</p>
+                            <p class="text-sm text-gray-400"><strong>Intermedio:</strong> <a href="https://ai-buddy.dev/zenith" target="_blank" class="text-indigo-300 hover:underline">RolePlay Zenith</a>. Simular debates.</p>
+                            <p class="text-sm text-gray-400"><strong>Avanzado:</strong> <a href="https://ai-buddy.dev/forge" target="_blank" class="text-indigo-300 hover:underline">Curriculum Forge</a>. Centrarse en la construcción de oraciones complejas.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Sección de Roadmap/Línea de Tiempo (Fases 2025/2026) -->
+    <section id="roadmap" class="py-16 px-4 md:px-8 max-w-7xl mx-auto">
+        <h2 class="text-5xl font-extrabold title-font text-center text-white mb-16">
+            <span class="dynamic-primary-text">ROADMAP</span>: Línea de Tiempo IA 2025
+        </h2>
+        
+        <div class="timeline-wrapper relative md:grid md:grid-cols-[1fr_auto_1fr] gap-8">
+            
+            <!-- Línea SVG central (para la animación) -->
+            <svg class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 h-full hidden md:block" viewBox="0 0 1 100" preserveAspectRatio="none">
+                <path id="timeline-path" class="timeline-path" d="M 0.5 0 L 0.5 100" stroke="#374151" stroke-width="1" fill="none"/>
+            </svg>
+
+            <!-- Línea de tiempo real (flex para móvil) -->
+            <div class="md:col-start-2 md:col-end-3 hidden md:block"></div>
+            <div class="md:col-span-3 flex flex-col md:flex-row md:grid md:grid-cols-[1fr_0_1fr] gap-8">
+
+                <!-- FASE 1: AI Pronunciación Ágil (Q1) - ADAPTADO A GEMINI -->
+                <div class="timeline-item timeline-left relative mb-8 md:mb-16 md:col-start-1 md:col-end-2" data-delay="0.5">
+                    <div class="timeline-dot bg-blue-400 hidden md:block"></div>
+                    <a href="#" target="_blank" class="timeline-link bg-[#1c1c1c] text-white p-6 rounded-xl shadow-lg glow-blue border-l-4 border-blue-400">
+                        <h3 class="text-2xl font-bold mb-2 text-blue-400 flex items-center">
+                            🚀 FASE 1: Corrección Fonética Avanzada (Q1)
+                        </h3>
+                        <p class="text-gray-300">
+                            <strong class="text-blue-300">Aplicación en Gemini: Retroalimentación Vocal.</strong> El usuario graba una frase. Gemini transcribe el audio, lo compara con la pronunciación ideal y **resalta las palabras o fonemas específicos** que se desviaron (ej: diferencia entre 'ship' y 'sheep').
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Espaciador Central para alineación derecha -->
+                <div class="md:col-start-2 md:col-end-3 hidden md:block"></div>
+                
+                <!-- FASE 2: Conversación Contextual (Q2) - ADAPTADO A GEMINI -->
+                <div class="timeline-item timeline-right relative mb-8 md:mb-16 md:col-start-3 md:col-end-4" data-delay="1.5">
+                    <div class="timeline-dot bg-teal-400 hidden md:block"></div>
+                    <a href="#" target="_blank" class="timeline-link bg-[#1c1c1c] text-white p-6 rounded-xl shadow-lg glow-teal border-r-4 border-teal-400">
+                        <h3 class="text-2xl font-bold mb-2 text-teal-400 flex items-center">
+                            🗣️ FASE 2: Role-Play Dinámico (Q2)
+                        </h3>
+                        <p class="text-gray-300">
+                            <strong class="text-teal-300">Aplicación en Gemini: Simulaciones Multi-turno.</strong> Gemini actúa como un personaje específico (ej: un entrevistador estricto o un cliente enojado). Evalúa las respuestas no solo por la gramática, sino por la **idoneidad del tono y registro** (formal/informal) en el contexto.
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Espaciador Central para alineación izquierda -->
+                <div class="md:col-start-2 md:col-end-3 hidden md:block"></div>
+
+                <!-- FASE 3: Arquitecto Gramatical (Q3) - ADAPTADO A GEMINI -->
+                <div class="timeline-item timeline-left relative mb-8 md:mb-16 md:col-start-1 md:col-end-2" data-delay="2.5">
+                    <div class="timeline-dot bg-pink-400 hidden md:block"></div>
+                    <a href="#" target="_blank" class="timeline-link bg-[#1c1c1c] text-white p-6 rounded-xl shadow-lg glow-pink border-l-4 border-pink-400">
+                        <h3 class="text-2xl font-bold mb-2 text-pink-400 flex items-center">
+                            📝 FASE 3: Evaluación de Competencias (Q3)
+                        </h3>
+                        <p class="text-gray-300">
+                            <strong class="text-pink-300">Aplicación en Gemini: Análisis de Errores Predictivo.</strong> El usuario proporciona textos o transcripciones. Gemini no solo corrige, sino que **identifica patrones de debilidad** (ej: 80% de errores en el subjuntivo) y genera automáticamente ejercicios centrados en ese tema.
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Espaciador Central para alineación derecha -->
+                <div class="md:col-start-2 md:col-end-3 hidden md:block"></div>
+
+                <!-- FASE 4: Navegador Cultural (Q4) - ADAPTADO A GEMINI -->
+                <div class="timeline-item timeline-right relative mb-16 md:col-start-3 md:col-end-4" data-delay="3.5">
+                    <div class="timeline-dot bg-orange-400 hidden md:block"></div>
+                    <a href="#" target="_blank" class="timeline-link bg-[#1c1c1c] text-white p-6 rounded-xl shadow-lg glow-orange border-r-4 border-orange-400">
+                        <h3 class="text-2xl font-bold mb-2 text-orange-400 flex items-center">
+                            ⛩️ FASE 4: Contextualización Idiomática (Q4)
+                        </h3>
+                        <p class="text-gray-300">
+                            <strong class="text-orange-300">Aplicación en Gemini: Decodificación Cultural.</strong> Cuando el usuario encuentra un modismo ('Break a leg') o una referencia cultural (fiestas, costumbres), Gemini lo explica detalladamente, proporciona su **origen etimológico** y lo usa en 3 contextos diferentes para asegurar la comprensión.
+                        </p>
+                    </a>
+                </div>
+                
+                <!-- Separador de Extensión -->
+                <div class="md:col-span-3 text-center my-8">
+                    <h3 class="text-2xl font-bold subtitle-font text-gray-500">EXTENSIÓN 2026: INNOVACIÓN CONTINUA</h3>
+                </div>
+
+                <!-- FASE 5: Mentoría Cognitiva (Q1 2026) - ADAPTADO A GEMINI -->
+                <div class="timeline-item timeline-left relative mb-8 md:mb-16 md:col-start-1 md:col-end-2" data-delay="4.5">
+                    <div class="timeline-dot bg-purple-400 hidden md:block"></div>
+                    <a href="#" target="_blank" class="timeline-link bg-[#1c1c1c] text-white p-6 rounded-xl shadow-lg glow-blue border-l-4 border-purple-400">
+                        <h3 class="text-2xl font-bold mb-2 text-purple-400 flex items-center">
+                            🧠 FASE 5: Repaso Basado en Memoria (Q1 2026)
+                        </h3>
+                        <p class="text-gray-300">
+                            <strong class="text-purple-300">Aplicación en Gemini: Spaced Repetition (SRS).</strong> Gemini usa el historial de errores del usuario. Genera ejercicios de vocabulario y gramática basados en el **algoritmo de repetición espaciada**, presentando conceptos difíciles con más frecuencia.
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Espaciador Central para alineación derecha -->
+                <div class="md:col-start-2 md:col-end-3 hidden md:block"></div>
+
+                <!-- FASE 6: Producción Multimedia (Q2 2026) - ADAPTADO A GEMINI -->
+                <div class="timeline-item timeline-right relative mb-8 md:mb-16 md:col-start-3 md:col-end-4" data-delay="5.5">
+                    <div class="timeline-dot bg-green-400 hidden md:block"></div>
+                    <a href="#" target="_blank" class="timeline-link bg-[#1c1c1c] text-white p-6 rounded-xl shadow-lg glow-teal border-r-4 border-green-400">
+                        <h3 class="text-2xl font-bold mb-2 text-green-400 flex items-center">
+                            🎥 FASE 6: Asistencia de Escritura Creativa (Q2 2026)
+                        </h3>
+                        <p class="text-gray-300">
+                            <strong class="text-green-300">Aplicación en Gemini: Co-creación de Contenido.</strong> El usuario comienza un texto (un guion, un artículo). Gemini no solo corrige la gramática, sino que ofrece **sugerencias de estilo, variación de vocabulario y frases más nativas** para elevar la calidad del producto final.
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Espaciador Central para alineación izquierda -->
+                <div class="md:col-start-2 md:col-end-3 hidden md:block"></div>
+
+                <!-- FASE 7: Adaptación Dialectal (Q3 2026) - ADAPTADO A GEMINI -->
+                <div class="timeline-item timeline-left relative mb-8 md:mb-16 md:col-start-1 md:col-end-2" data-delay="6.5">
+                    <div class="timeline-dot bg-red-400 hidden md:block"></div>
+                    <a href="#" target="_blank" class="timeline-link bg-[#1c1c1c] text-white p-6 rounded-xl shadow-lg glow-pink border-l-4 border-red-400">
+                        <h3 class="text-2xl font-bold mb-2 text-red-400 flex items-center">
+                            🌍 FASE 7: Mapeo de Variantes Regionales (Q3 2026)
+                        </h3>
+                        <p class="text-gray-300">
+                            <strong class="text-red-300">Aplicación en Gemini: Traducción Sensible al Dialecto.</strong> El usuario pregunta "¿Cómo se dice 'torta' en español?". Gemini responde con las variantes regionales (España: pastel, Venezuela: torta, México: pastel/torta, Argentina: torta) y explica las **diferencias de uso y connotación**.
+                        </p>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
     
-    <!-- Script para la animación de máquina de escribir y lógica de menú -->
+    <!-- Footer Dinámico con Animación de Máquina de Escribir -->
+    <footer class="py-12 bg-[#151515] text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-lg md:text-xl font-mono text-white mb-4">
+                <span id="typewriter-text" class="text-red-400 font-bold"></span>
+                <span class="typewriter-cursor"></span>
+            </p>
+            
+            <a href="https://www.instagram.com/zvacademy_vzla" target="_blank" class="inline-block mt-4 text-indigo-400 hover:text-teal-400 transition duration-300 text-sm md:text-base font-semibold border-b border-indigo-400 hover:border-teal-400">
+                Sigue Nuestras Aventuras en Instagram (@zvacademy_vzla)
+            </a>
+
+            <p class="text-xs text-gray-600 mt-6">&copy; 2025 AI Language Study Buddy. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
     <script>
-        // --- 1. LÓGICA DE TYPEWRITER ---
+        // Array de frases en diferentes idiomas
         const phrases = [
             "Muchas aventuras comienzan con un 'sí'.",
-            "Many adventures start with a 'yes'.",    
-            "Beaucoup d'aventures commencent par un 'oui'.", 
-            "Molte avventure iniziano con un 'sì'." 
+            "Many adventures start with a 'yes'.",
+            "Viele Abenteuer beginnen mit einem 'Ja'.",
+            "多くの冒険は「はい」から始まります (Ōku no bōken wa 'hai' kara hajimarimasu)."
         ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 75; // Milisegundos para escribir
+        const deletingSpeed = 40; // Milisegundos para borrar
+        const pauseTime = 1500; // Pausa entre frases
 
-        const typingSpeed = 70; 
-        const erasingSpeed = 40; 
-        const delayBeforeNext = 1500; 
+        const typewriterElement = document.getElementById('typewriter-text');
+        const cursorElement = document.querySelector('.typewriter-cursor');
 
-        const typewriterElement = document.getElementById('typewriter-output');
+        // Variables de Configuración Global
+        let currentTheme = localStorage.getItem('theme') || 'default';
+        let highContrastEnabled = localStorage.getItem('highContrast') === 'true';
 
-        async function type(text) {
-            for (let i = 0; i < text.length; i++) {
-                typewriterElement.textContent += text.charAt(i);
-                await new Promise(resolve => setTimeout(resolve, typingSpeed));
+        // ------------------------------------------------------------------
+        // Lógica de Sidebar
+        // ------------------------------------------------------------------
+
+        function openSidebar() {
+            document.getElementById('settings-sidebar').classList.add('open');
+            document.getElementById('sidebar-overlay').classList.add('visible');
+        }
+
+        function closeSidebar() {
+            document.getElementById('settings-sidebar').classList.remove('open');
+            document.getElementById('sidebar-overlay').classList.remove('visible');
+        }
+
+        // ------------------------------------------------------------------
+        // Lógica de Máquina de Escribir
+        // ------------------------------------------------------------------
+
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                // Modo Borrado
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                // Modo Escritura
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? deletingSpeed : typingSpeed;
+            
+            // Si termina de escribir la frase actual
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                speed = pauseTime;
+                isDeleting = true; // Empieza a borrar
+                cursorElement.style.animation = 'none'; // Detener parpadeo para simular la pausa
+                setTimeout(() => {
+                    cursorElement.style.animation = '';
+                }, pauseTime);
+            } 
+            // Si termina de borrar la frase actual
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length; // Siguiente frase
+                speed = typingSpeed;
+            }
+
+            setTimeout(typeWriter, speed);
+        }
+
+        // ------------------------------------------------------------------
+        // Lógica de Modos de Contraste y Navegación
+        // ------------------------------------------------------------------
+
+        function applyHighContrast(enable) {
+            const body = document.body;
+            highContrastEnabled = enable;
+            if (enable) {
+                body.classList.add('high-contrast');
+                localStorage.setItem('highContrast', 'true');
+            } else {
+                body.classList.remove('high-contrast');
+                localStorage.setItem('highContrast', 'false');
             }
         }
 
-        async function erase() {
-            let currentText = typewriterElement.textContent;
-            while (currentText.length > 0) {
-                currentText = currentText.substring(0, currentText.length - 1);
-                typewriterElement.textContent = currentText;
-                await new Promise(resolve => setTimeout(resolve, erasingSpeed));
-            }
+        function toggleContrast() {
+            applyHighContrast(!highContrastEnabled);
         }
 
-        async function cyclePhrases() {
-            let i = 0;
-            while (true) {
-                const currentPhrase = phrases[i];
-                // Note: The caret blinking effect is defined in the CSS of the original immersive
-                await type(currentPhrase);
-                await new Promise(resolve => setTimeout(resolve, delayBeforeNext));
-                await erase();
-                i = (i + 1) % phrases.length;
-            }
-        }
-
-        // --- 2. LÓGICA DEL MODAL (PAGINA DE COMIC) ---
-        const menuOverlay = document.getElementById('menu-modal-overlay');
-        const body = document.body;
-
-        function toggleMenu() {
-            body.classList.toggle('modal-show');
-        }
-
-        // Para cerrar el modal al hacer clic fuera
-        function handleOutsideClick(event) {
-            if (event.target === menuOverlay) {
-                toggleMenu();
-            }
-        }
+        // ------------------------------------------------------------------
+        // Lógica de Temas de Color
+        // ------------------------------------------------------------------
         
-        // --- 3. LÓGICA DE TEMA Y COLOR ---
-        const vogueColorSchemes = {
-            gold: { primary: '#D4AF37', secondary: '#B8860B', pink: '#A5002D' }, 
-            crimson: { primary: '#A5002D', secondary: '#8B0000', pink: '#D4AF37' }, 
-            silver: { primary: '#C0C0C0', secondary: '#808080', pink: '#2F4F4F' }, 
-            sapphire: { primary: '#0F52BA', secondary: '#000080', pink: '#C0C0C0' }
-        };
-
-        function toggleTheme() {
-            const isLight = document.body.classList.toggle('light-mode');
-            const themeButton = document.getElementById('theme-toggle-btn');
+        function applyTheme(theme) {
+            const body = document.body;
+            body.classList.remove('theme-solar', 'theme-cyclops');
             
-            if (isLight) {
-                themeButton.textContent = 'Modo: Oscuro';
-                localStorage.setItem('theme', 'light');
-            } else {
-                themeButton.textContent = 'Modo: Claro';
-                localStorage.setItem('theme', 'dark');
+            if (theme === 'solar') {
+                body.classList.add('theme-solar');
+            } else if (theme === 'cyclops') {
+                body.classList.add('theme-cyclops');
             }
-            const savedColor = localStorage.getItem('vogueColor') || 'gold'; 
-            changeVogueColor(savedColor);
+            
+            currentTheme = theme;
+            localStorage.setItem('theme', theme);
         }
 
-        function changeVogueColor(colorKey) {
-            const scheme = vogueColorSchemes[colorKey];
-            if (!scheme) return;
-            
-            const isLight = document.body.classList.contains('light-mode');
-            const root = document.documentElement.style;
-
-            if (isLight) {
-                // En Light Mode, forzamos la mayoría de los colores a ser Primary, manteniendo el acento fijo.
-                root.setProperty('--primary-vogue', scheme.primary);
-                root.setProperty('--secondary-vogue', scheme.primary); 
-                root.setProperty('--accent-red', scheme.primary); 
-                root.setProperty('--light-accent-fixed', vogueColorSchemes.crimson.primary); 
-
-            } else {
-                // En Dark Mode, usamos el esquema completo
-                root.setProperty('--primary-vogue', scheme.primary);
-                root.setProperty('--secondary-vogue', scheme.secondary);
-                root.setProperty('--accent-red', scheme.pink); 
-            }
-            
-            document.querySelectorAll('.color-option').forEach(btn => {
-                btn.classList.remove('active');
+        function setupThemeListeners() {
+            document.querySelectorAll('.theme-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const theme = e.currentTarget.getAttribute('data-theme');
+                    applyTheme(theme);
+                });
             });
-            document.getElementById(`color-btn-${colorKey}`).classList.add('active');
-            localStorage.setItem('vogueColor', colorKey);
         }
 
         function loadPreferences() {
+            // 1. Cargar Tema (Color)
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-                document.getElementById('theme-toggle-btn').textContent = 'Modo: Oscuro';
-            } else {
-                document.getElementById('theme-toggle-btn').textContent = 'Modo: Claro';
+            if (savedTheme) {
+                applyTheme(savedTheme);
             }
-            const savedColor = localStorage.getItem('vogueColor') || 'gold'; 
-            changeVogueColor(savedColor);
+            
+            // 2. Cargar Contraste
+            const savedContrast = localStorage.getItem('highContrast');
+            applyHighContrast(savedContrast === 'true');
         }
-        
-        // --- 4. LÓGICA DE ANIMACIÓN DEL ROADMAP (Intersection Observer) ---
+
+        function setupNavigation() {
+            const menuButton = document.getElementById('menu-button');
+            const closeButton = document.getElementById('close-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            // Inyectar iconos SVG
+            menuButton.innerHTML = icons.menu;
+            closeButton.innerHTML = icons.close;
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            closeButton.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Listener para abrir Sidebar
+            document.getElementById('config-icon-button').addEventListener('click', openSidebar);
+            document.getElementById('contrast-toggle-sidebar').addEventListener('click', toggleContrast);
+        }
+
+        // ------------------------------------------------------------------
+        // Lógica de Animación de Línea de Tiempo (Roadmap)
+        // ------------------------------------------------------------------
+
         function setupRoadmapAnimation() {
-            const timelineWrapper = document.getElementById('timeline-wrapper');
-            const path = document.getElementById('timeline-svg-path');
+            const timelineWrapper = document.querySelector('.timeline-wrapper');
+            const path = document.getElementById('timeline-path');
             const milestones = timelineWrapper.querySelectorAll('.timeline-item');
             
-            if (!path) return;
+            if (!path || window.innerWidth < 768) return; // Desactivar animación de línea en línea en móvil
 
+            // La longitud de la ruta SVG se establece en 20000 para una transición larga y fluida
             const pathLength = 20000; 
             
             path.style.strokeDasharray = pathLength;
@@ -793,6 +738,7 @@
                     if (entry.isIntersecting) {
                         timelineWrapper.classList.add('animate-roadmap');
                         
+                        // Añadir la clase de visibilidad con retraso para cada hito
                         milestones.forEach(milestone => {
                             const delay = parseFloat(milestone.getAttribute('data-delay'));
                             setTimeout(() => {
@@ -817,9 +763,11 @@
 
         // Iniciar la aplicación
         window.onload = function() {
-            loadPreferences();
-            cyclePhrases(); 
+            loadPreferences(); // Cargar tema y contraste antes de todo
+            setupNavigation();
+            setupThemeListeners();
             setupRoadmapAnimation();
+            typeWriter(); // Iniciar la animación de la máquina de escribir
         };
     </script>
 </body>
